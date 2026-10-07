@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Dedupe Lab — replay 12 charge events over a link that drops two ACKs, under at-most-once, at-least-once, and dedupe delivery. Watch exactly-once emerge as a consumer property, not a network property.">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f2e9">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#171226">
+  <title>Dedupe Lab — exactly-once delivery</title>
+  <link rel="stylesheet" href="/tokens.css">
+  <link rel="stylesheet" href="/styles.css">
+<!-- pb-shell --><link rel="stylesheet" href="./pb-shell.css"><!-- pb-shell --><!-- pb-back --><link rel="stylesheet" href="./pb-back.css"><!-- pb-back --></head>
+<body>
+<a class="skip-link" href="#lab">Skip to the lab</a>
+<main>
+  <nav aria-label="Primary"><a aria-current="page" href="/">Lab</a><a href="/guide.html">Guide</a><a href="https://github.com/anhquanbd2021/exactly-once-delivery">Source</a></nav>
+  <header class="hero">
+    <div><p class="eyebrow">Dedupe Lab · a delivery-semantics lab</p><h1>Exactly-once is a consumer property, not a wire guarantee.</h1><p class="lede">Twelve card charges over a link that eats two ACKs. Change the policy around the wire — never the wire — and watch who pays the price.</p></div>
+    <p class="warning"><strong>Educational model.</strong> A deterministic replay of one lossy link — the same two first-attempt ACKs drop on every run so the three policies can be compared on identical physics. Replays run against this demo's own API; nothing else leaves the page.</p>
+  </header>
+
+  <p class="claim">"Exactly-once delivery" is at-least-once wearing a dedupe store. The wire never changes across the three policies — only who cleans up afterwards does.</p>
+
+  <section aria-labelledby="wireHeading">
+    <div class="section-heading"><div><p class="eyebrow">The wire</p><h2 id="wireHeading">The same link for every run</h2></div></div>
+    <p class="muted">12 charge events, <strong>$49.00</strong> each — expected ledger <strong>$588.00</strong>. Every packet arrives. The ACKs for these two never make it back:</p>
+    <div class="wire" id="wire"></div>
+  </section>
+
+  <section id="lab" aria-label="Delivery policy">
+    <div class="section-heading"><div><p class="eyebrow">The policies</p><h2>Pick who cleans up after the wire</h2></div></div>
+    <p class="muted">Same packets, same loss. The only thing that changes is the sender's retry policy and whether the consumer keeps a dedupe store.</p>
+    <div class="modebar" role="group" aria-label="Delivery policy">
+      <span class="modebar-label">Policy</span>
+      <button type="button" class="toggle" id="btn-at-most-once" data-mode="at-most-once" aria-pressed="false">At most once</button>
+      <button type="button" class="toggle" id="btn-at-least-once" data-mode="at-least-once" aria-pressed="false">At least once</button>
+      <button type="button" class="toggle" id="btn-dedupe" data-mode="dedupe" aria-pressed="true">Exactly-once (dedupe)</button>
+    </div>
+  </section>
+
+  <section aria-labelledby="modeLabel" aria-live="polite">
+    <div class="section-heading"><div><p class="eyebrow">The replay</p><h2 id="modeLabel">Exactly-once — retry + dedupe store</h2></div></div>
+    <div class="stats">
+      <div class="stat"><div class="n" id="statSent">0</div><div class="l">transmissions</div></div>
+      <div class="stat"><div class="n" id="statArrived">0</div><div class="l">arrived</div></div>
+      <div class="stat"><div class="n" id="statOnce">0</div><div class="l" id="statOnceLabel">charged once</div></div>
+      <div class="stat"><div class="n" id="statExtra">0</div><div class="l" id="statExtraLabel">duplicates rejected</div></div>
+      <div class="stat"><div class="n" id="statCharged">$0</div><div class="l">ledger total</div></div>
+    </div>
+    <p class="verdict" id="verdict"></p>
+  </section>
+
+  <section aria-labelledby="laneHeading">
+    <div class="section-heading"><div><p class="eyebrow">Per-message view</p><h2 id="laneHeading">Every transmission, every outcome</h2></div></div>
+    <p class="muted">One card per charge event: transmission attempts first, then what the consumer did with each arrival.</p>
+    <div class="lane" id="lane"></div>
+  </section>
+
+  <section aria-labelledby="ledgerHeading">
+    <div class="section-heading"><div><p class="eyebrow">The ledger</p><h2 id="ledgerHeading">What the card statement says</h2></div></div>
+    <div class="ledger panel">
+      <div class="total"><span id="ledgerTotal">$0.00</span> <span class="note">charged</span></div>
+      <div id="ledgerNote" class="note"></div>
+      <div id="ledgerList"></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="traceHeading">
+    <div class="section-heading"><div><p class="eyebrow">The trace</p><h2 id="traceHeading">Wire + consumer, line by line</h2></div></div>
+    <pre class="trace" id="trace"></pre>
+  </section>
+
+  <p><a href="/guide.html">Read what each policy proves — and what the lab doesn't claim</a> · <a href="https://github.com/anhquanbd2021/exactly-once-delivery">Inspect source and tests</a></p>
+</main>
+<script type="module" src="/app/app.js"></script>
+<!-- pb-shell --><a class="pb-shell" href="https://github.com/anhquanbd2021/exactly-once-delivery" title="exactly-once-delivery — an Article Playbook demo (view source)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="2" y="2" width="9" height="9" rx="2" fill="rgb(45,212,191)"/><rect x="13" y="2" width="9" height="9" rx="2" fill="rgb(45,212,191)" opacity=".45"/><rect x="2" y="13" width="9" height="9" rx="2" fill="rgb(45,212,191)" opacity=".45"/><rect x="13" y="13" width="9" height="9" rx="4.5" fill="rgb(45,212,191)"/></svg><b>exactly-once-delivery</b><i>DEMO</i></a><!-- pb-shell --><!-- pb-back --><a class="pb-back" id="pb-back" href="https://github.com/anhquanbd2021/exactly-once-delivery" title="Back to the article — exactly-once-delivery">← Article <i>PLAYBOOK</i></a><script>(function(){var a=document.getElementById('pb-back');if(!a)return;var h=location.hostname;if(/^(localhost|127\.0\.0\.1|192\.168\.|10\.|172\.(1[6-9]|2[0-9]|3[01])\.)/.test(h)){a.href='//'+h+':'+(/^(localhost|127\.0\.0\.1)$/.test(h)?'1234':'30082')+'/microsites/article.html?slug=exactly-once-delivery';}})();</script><!-- pb-back --></body>
+</html>

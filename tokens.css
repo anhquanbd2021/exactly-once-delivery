@@ -1,0 +1,92 @@
+/* tokens.css — direction "carbon-copy" (generated; do not hand-edit) */
+:root {
+  color-scheme: light;
+  --color-bg: #f6f2e9;
+  --color-text: #241f35;
+  --color-surface: #fffdf6;
+  --color-accent-fill: #4c3a9e;
+  --color-accent-text: #ffffff;
+  --color-on-accent: #f4f0fd;
+  --accent-50: #f4f0fd;
+  --accent-100: #e9e2fb;
+  --accent-200: #d5c9f6;
+  --accent-300: #b8a4ee;
+  --accent-400: #9a7fe3;
+  --accent-500: #7d5ed4;
+  --accent-600: #6446bb;
+  --accent-700: #4f3899;
+  --accent-800: #3c2b74;
+  --accent-900: #2a1e50;
+  --accent-950: #170f31;
+  --danger-300: #b3261e;
+  --danger-500: #d5301f;
+  --danger-fill: #d5301f;
+  --danger-text: #ffffff;
+  --step-xs: 12px;
+  --step-sm: 14px;
+  --step-base: 16px;
+  --step-lg: 20px;
+  --step-xl: 28px;
+  --step-2xl: 40px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --font-heading: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --font-body: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --color-bg: #171226;
+    --color-text: #ede8f8;
+    --color-surface: #221b38;
+    --color-accent-fill: #a78bfa;
+    --color-accent-text: #1c1333;
+    --color-on-accent: #2a1e50;
+    --accent-50: #160f2e;
+    --accent-100: #221740;
+    --accent-200: #32215c;
+    --accent-300: #452e7d;
+    --accent-400: #5a3fa3;
+    --accent-500: #7454c4;
+    --accent-600: #9273db;
+    --accent-700: #b096ea;
+    --accent-800: #cabaf4;
+    --accent-900: #e2d9fb;
+    --accent-950: #f4f0fd;
+    --danger-300: #fca5a5;
+    --danger-500: #f87171;
+    --danger-fill: #f87171;
+    --danger-text: #450a0a;
+    --step-xs: 12px;
+    --step-sm: 14px;
+    --step-base: 16px;
+    --step-lg: 20px;
+    --step-xl: 28px;
+    --step-2xl: 40px;
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 24px;
+    --space-6: 32px;
+    --space-7: 48px;
+    --space-8: 64px;
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 16px;
+    --font-heading: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    --font-body: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
